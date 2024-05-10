@@ -17,12 +17,13 @@ This repository includes two Python scripts:
 
 freeGridConstraints.py performs an automatic checking for the fulfilment of the design geometrical constraints. \
 The script needs as input data: \
-•	the geometry of the design solution in .obj or .ply file format.
+•	the geometry of the design solution in .obj or .ply file format; \
+•	the type DBG (0 for barrel, 1 for dome, 2 for hypar)
 
 freeGridBuildability.py performs an automatic calculation of the buildability goal and performance metrics.\
 The script needs as input data:\
 •	the geometry of the design solution in .obj or .ply file format; \
-•	the type DBG and the number of cross sections of the members.
+•	the number of cross sections of the members.
 
 
 
