@@ -27,4 +27,12 @@ The script needs as input data:\
 
 
 
-Required Python >= 3.7 (64 bit), pymeshlab, numpy
+Required Python >= 3.11 (64 bit). See requirements.txt for detailed package dependencies.
+
+## Installation
+
+Install the required Python packages using pip:
+
+```sh
+pip install -r requirements.txt
+```

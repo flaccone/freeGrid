@@ -94,7 +94,7 @@ def computeBins(nparray, binSize, plot=False, roundPrecision = 0):
     # computes the number of non-null bins of a distribution (array) centered on the mode value for a given binSize  
     mode = statistics.mode(np.round(nparray,roundPrecision))
     mean = statistics.mean(nparray)
-    devs = statistics.stdev(nparray)
+    devs = np.std(nparray, ddof=1)
     nLeftBins = abs((mode - 0.5*binSize - nparray.min() ) / binSize) + 1
     nRightBins =abs((nparray.max() - mode + 0.5*binSize ) / binSize) + 1
     range0 = mode - 0.5*binSize - int(nLeftBins)* binSize
@@ -237,7 +237,7 @@ def nodeClustering(pointSetList):
             newId = np.unravel_index(np.argmax(minDistFromClusters, axis=None), dist.shape)
             centroids.append( pointSetList[newId[1]] )
             addedDist = pointSetBestFit(pointSetList, centroids[counter], perm )
-            dist = np.row_stack ((dist,np.array(addedDist)))
+            dist = np.vstack((dist,np.array(addedDist))) 
             minDistFromClusters = np.min(dist,axis=0)
             minValue = np.max(minDistFromClusters)
         numberOfClusters = counter + 1
