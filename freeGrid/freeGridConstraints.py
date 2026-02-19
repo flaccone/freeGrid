@@ -87,19 +87,18 @@ class mesh:
     def checkHoles(self):
         ms = pymeshlab.MeshSet()
         ms.load_new_mesh(self.path)
-        ms.meshing_close_holes()
-        try: 
-            ms.compute_scalar_by_function_per_face(q = 'fq = 1', onselected=True)
-        except:
-            pass
-        # filled holes have number 1
-        selectedFaces = ms.current_mesh().face_scalar_array()
-        selectedFaces = [i for i in selectedFaces if i!=0]
-        # print(selectedFaces)
-        if len(selectedFaces) != 0:
-            sys.exit('ERROR: the mesh has holes (missing panels)')
-        else:
-            print("GC.1 compliance: no missing faces are found")
+
+        topo = ms.get_topological_measures()
+        if topo['connected_components_number'] > 1:
+            sys.exit('ERROR: the mesh has ' + str(topo['connected_components_number']) + ' connected components')
+
+        # check if there is only one border (hole)
+        if topo['number_holes'] > 1:
+            sys.exit('ERROR: the mesh has ' + str(topo['number_holes']) + ' holes (missing panels)')
+        elif topo['number_holes'] == 0:
+            sys.exit('ERROR: the mesh has no borders, it is not a valid mesh for the benchmark')
+
+        print("GC.1 compliance: no missing faces are found")
     
     def checkAreaProjection(self, baselineProjArea):
         ms = pymeshlab.MeshSet()
