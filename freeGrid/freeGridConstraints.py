@@ -1,7 +1,7 @@
 # Project: FREEGRID 
-# updated 20230531
+# updated 20260224
 # This file checks the geometric constraints GC of the benchmark
-# required Python >= 3.7 (64 bit), numpy, pymeshlab
+# required Python >= 3.11 (64 bit), numpy>= 2.4.2, pymeshlab 2025.7.post1
 # input mesh to be in meters
 
 import os
